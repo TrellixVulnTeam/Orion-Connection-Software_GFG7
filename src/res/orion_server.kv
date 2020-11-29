@@ -1,0 +1,51 @@
+#:kivy 1.11.1
+
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+#: import Image kivy.uix.image.Image
+#=============================================
+
+WindowManager:
+    transition: NoTransition()
+
+    MenuScreen:
+    LoggerScreen
+    InfoScreen:
+    
+#=============================================
+
+<MenuScreen>:
+    name: "MenuScreen"
+    
+    Image:
+        source: app.assets.MAIN_SCREEN
+        size_hint: 1,1
+        keep_ratio: False
+        allow_stretch: True
+    
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.5, 0.5
+        pos_hint: {'center_x': 0.6, 'center_y': 0.4}
+        padding: 100
+        spacing: 40
+
+        ImageButton:
+            id: control_btn
+            source: app.assets.CONNECT
+            size_hint: 0.5, 0.1
+            keep_ratio: True
+
+        ImageButton:
+            id: logger_btn
+            source: app.assets.LOGGER
+            size_hint: 0.5, 0.1
+            keep_ratio: True
+
+        ImageButton:
+            id: about_btn
+            source: app.assets.ABOUT
+            size_hint: 0.5, 0.1
+            keep_ratio: True
+
+
+
