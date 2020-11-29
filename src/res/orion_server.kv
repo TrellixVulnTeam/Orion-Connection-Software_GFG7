@@ -8,8 +8,9 @@ WindowManager:
     transition: NoTransition()
 
     MenuScreen:
-    LoggerScreen
-    InfoScreen:
+    ConnectScreen:
+    LoggerScreen:
+    AboutScreen:
     
 #=============================================
 
@@ -30,10 +31,13 @@ WindowManager:
         spacing: 40
 
         ImageButton:
-            id: control_btn
+            id: connect_btn
             source: app.assets.CONNECT
             size_hint: 0.5, 0.1
             keep_ratio: True
+
+            on_release: 
+                app.root.current = "ConnectScreen"
 
         ImageButton:
             id: logger_btn
@@ -41,11 +45,59 @@ WindowManager:
             size_hint: 0.5, 0.1
             keep_ratio: True
 
+            on_release: 
+                app.root.current = "LoggerScreen"
+
         ImageButton:
             id: about_btn
             source: app.assets.ABOUT
             size_hint: 0.5, 0.1
             keep_ratio: True
 
+            on_release: 
+                app.root.current = "AboutScreen"
 
 
+<ConnectScreen>:
+    name: "ConnectScreen"
+    Image:
+        source: app.assets.CONNECT_SCREEN
+        size_hint: 1,1
+        keep_ratio: False
+        allow_stretch: True
+
+    FloatLayout: 
+        BackButton:
+
+
+<LoggerScreen>:
+    name: "LoggerScreen"
+    Image:
+        source: app.assets.LOGGER_SCREEN
+        size_hint: 1,1
+        keep_ratio: False
+        allow_stretch: True
+    
+    FloatLayout: 
+        BackButton:      
+
+<AboutScreen>:
+    name: "AboutScreen"
+    Image:
+        source: app.assets.ABOUT_SCREEN
+        size_hint: 1,1
+        keep_ratio: False
+        allow_stretch: True
+
+    FloatLayout: 
+        BackButton:
+
+<BackButton>:
+    text: "Back"
+    font_name: app.assets.DEF_FONT
+    size_hint: None, None
+    pos_hint: {"right": 0.98, "bottom": 0.9}
+    font_size: 46
+
+    on_release:
+        app.root.current = "MenuScreen"

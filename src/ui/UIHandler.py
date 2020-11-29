@@ -1,18 +1,16 @@
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 
 from win32api import GetSystemMetrics
 
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
-from kivy.uix.button import ButtonBehavior
 from kivy.core.window import Window
 
 from src.ui.ComplexButton import ComplexButton
 from src.utils import Constants
-from src.utils.StableBoolean import StableBoolean
+
 
 '''
     Screens
@@ -27,11 +25,15 @@ class MenuScreen(Screen):
     pass
 
 
+class ConnectScreen(Screen):
+    pass
+
+
 class LoggerScreen(Screen):
     pass
 
 
-class InfoScreen(Screen):
+class AboutScreen(Screen):
     pass
 
 
@@ -45,6 +47,10 @@ class ImageButton(ComplexButton, Image):
 
 
 class TextButton(ComplexButton, Label):
+    pass
+
+
+class BackButton(TextButton):
     pass
 
 '''
