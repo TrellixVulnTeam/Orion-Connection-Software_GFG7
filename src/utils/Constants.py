@@ -8,7 +8,9 @@ def file_name(name, format='.png', path=str(str(Path.cwd() / 'res' / 'des'))):
 
 
 class GUIFiles:
-    def __init__(self):
+    def __init__(self, log):
+        self.log = log
+
         self.KV_DES_FILE = file_name("orion_server", format='.kv', path=str(Path.cwd() / 'res'))
         self.DEF_FONT = file_name("Orion", format='.ttf', path=str(Path.cwd() / 'res'))
 
@@ -21,15 +23,27 @@ class GUIFiles:
         self.LOGGER = file_name("Logger")
         self.BACK_BTN = file_name("BackBTN")
 
-        self.files = [a for a in dir(self) if not a.startswith('__')]
-        self.is_load = True
+        self.files = [self.MAIN_SCREEN, self.ABOUT_SCREEN, self.CONNECT_SCREEN, self.LOGGER_SCREEN, self.ABOUT,
+                      self.LOGGER, self.CONNECT, self.BACK_BTN, self.KV_DES_FILE, self.DEF_FONT]
+        self.check_files()
+
+    def check_files(self):
+        is_load = True
         for file in self.files:
             f = None
             try:
                 f = open(file)
 
             except FileNotFoundError:
-                self.is_load = False
+                is_load = False
+                self.log.write("ERROR loading {}".format(file))
 
-            if self.is_load:
+            if f is not None:
                 f.close()
+
+        if is_load:
+            self.log.write("Loaded ALL GUI")
+
+class Network:   
+    COMM_PORT = 1690
+    BROAD_PORT = 1691
