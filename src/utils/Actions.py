@@ -61,6 +61,3 @@ def gpu_name():
 def gpu_temp():
     return gpu.temperature
 
-
-if __name__ == '__main__':
-    print(gpu_temp())

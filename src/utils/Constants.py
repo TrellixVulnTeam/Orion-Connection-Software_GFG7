@@ -44,6 +44,8 @@ class GUIFiles:
         if is_load:
             self.log.write("Loaded ALL GUI")
 
+
 class Network:   
     COMM_PORT = 1690
     BROAD_PORT = 1691
+    BROAD_IP = "239.255.255.254"
