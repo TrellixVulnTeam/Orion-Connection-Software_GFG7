@@ -28,11 +28,17 @@ def split(msg: str):
 
 
 class NetCommands(Enum):
+    """
+    All the msgs type that the computer can send to the server by it's self.
+    """
     APPROVAL = "APPROVAL"
     DISAPPROVAL = "DISAPPROVAL"
     ID_VAL = "ID_VAL"
 
 
 class NetLogicIncomes(Enum):
+    """
+    Incoming msgs from the server,
+    """
     VALID = "VALID"
     INVALID = "INVALID"

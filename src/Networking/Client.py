@@ -1,9 +1,13 @@
 import socket
 
 from src.networking import NetworkPackets
+from src.utils.Logger import utilLogger
 
 
-class Client():
+class Client:
+    """
+    The Client class that
+    """
     def __init__(self, host: str, address: tuple):
         self.client_sock = socket.socket()
         self.address = address
@@ -17,9 +21,9 @@ class Client():
         try:
             self.client_sock.connect(self.address)
 
-        except:
+        except ConnectionRefusedError as err:
+            utilLogger.write("Connection timeout! --> {}".format(err))
             valid = False
-            print("lol")
 
         finally:
             return valid

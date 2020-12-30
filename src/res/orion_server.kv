@@ -9,6 +9,8 @@ WindowManager:
 
     MenuScreen:
     ConnectScreen:
+    ConnectPairScreen:
+    ConnectIDScreen:
     LoggerScreen:
     AboutScreen:
     
@@ -55,8 +57,64 @@ WindowManager:
             keep_ratio: True
 
             on_release: 
-                app.root.current = "AboutScreen"
+                app.root.current = "ConnectIDScreen"
 
+
+<ConnectPairScreen>:
+    name: "ConnectPairScreen"
+    Image:
+        source: app.assets.CONNECT_SCREEN
+        size_hint: 1,1
+        keep_ratio: False
+        allow_stretch: True
+
+    FloatLayout:
+        Image:
+            source: app.assets.PAIR_IMG
+            size_hint: 1,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+            keep_ratio: False
+            allow_stretch: False
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 0.2, 0.2
+            pos_hint: {'center_x': 0.5, 'center_y': 0.58}
+
+            ImageButton:
+                id: pair_btn
+                source: app.assets.PAIR_BTN
+                size_hint: 0.6, 0.6
+                keep_ratio: True
+
+
+        BackButton:
+    
+<ConnectIDScreen>:
+    name: "ConnectIDScreen"
+    Image:
+        source: app.assets.CONNECT_SCREEN
+        size_hint: 1,1
+        keep_ratio: False
+        allow_stretch: True
+
+    FloatLayout:
+        Image:
+            source: app.assets.ID_FRAME
+            size_hint: 0.4, 0.4
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            keep_ratio: False
+            allow_stretch: False
+
+
+        IDTextWidget:
+            id: id_widg
+            size_hint: 0.7, 0.7
+            pos_hint: {'center_x': 0.727, 'center_y': 0.22}
+
+
+
+        BackButton:
 
 <ConnectScreen>:
     name: "ConnectScreen"
@@ -66,7 +124,26 @@ WindowManager:
         keep_ratio: False
         allow_stretch: True
 
-    FloatLayout: 
+    FloatLayout:
+        Image:
+            source: app.assets.CONNECTED_TITLE
+            size_hint: 1,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            keep_ratio: False
+            allow_stretch: False
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 0.1, 0.1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            ImageButton:
+                id: discon_btn
+                source: app.assets.DISCONNECT_BTN
+                size_hint: 0.6, 0.6
+                keep_ratio: True
+
+
         BackButton:
 
 
@@ -101,3 +178,15 @@ WindowManager:
 
     on_release:
         app.root.current = "MenuScreen"
+
+<TransTextInput>:
+    multiline: False
+    foreground_color: (1,0,1,1)
+    background_color: (0,0,0,0)
+    cursor_color: (1, 1, 1, 0.971)
+    cursor_width: 1
+    coulor: (1, 1, 1, 1)
+
+    canvas.before:
+        Color:
+            rgba: self.coulor

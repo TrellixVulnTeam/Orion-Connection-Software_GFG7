@@ -1,6 +1,7 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
 
 from win32api import GetSystemMetrics
 
@@ -29,6 +30,14 @@ class ConnectScreen(Screen):
     pass
 
 
+class ConnectPairScreen(Screen):
+    pass
+
+
+class ConnectIDScreen(Screen):
+    pass
+
+
 class LoggerScreen(Screen):
     pass
 
@@ -54,6 +63,21 @@ class BackButton(TextButton):
     pass
 
 
+class TransTextInput(TextInput):
+    def __init__(self, **kwargs):
+        super(TransTextInput, self).__init__(**kwargs)
+
+
+class IDTextWidget(TransTextInput):
+    def __init__(self, **kwargs):
+        super(TransTextInput, self).__init__(**kwargs)
+        self.text = open(Constants.Files.ID, 'r').read()
+        self.cursor_blink = False
+        self.font_name = Constants.Files.DEF_FONT
+        self.font_size = 140
+
+
+
 '''
     App
 '''
@@ -62,7 +86,7 @@ class BackButton(TextButton):
 class OrionServer(App):
     def __init__(self, **kwargs):
         super(OrionServer, self).__init__(**kwargs)
-        self.assets = Constants.GUIFiles()
+        self.assets = Constants.Files
         self.kv_des = Builder.load_file(self.assets.KV_DES_FILE)
 
     def build(self):
