@@ -5,7 +5,7 @@ import os
 
 
 class Logger:
-    def __init__(self, log_name, is_console=False):
+    def __init__(self, log_name: str, is_console=False):
         self.FORMAT = '.log'
         self.log_name = log_name
         self.is_console = is_console
@@ -23,15 +23,15 @@ class Logger:
         self.log.setLevel(logging.INFO)
         self.logger.addHandler(self.log)
 
-    def write(self, msg):
+    def write(self, msg: str):
         self.logger.error("{} --> {}\n".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S"), msg))
         if self.is_console:
             print("[LOG] \033[92m-name={}-\033[1;36m {} \033[;1m".format(self.log_name, msg))
 
-    def read_logger(self):
+    def read(self) -> str:
         return open(self.path, 'r').read()
 
-    def export(self, path, name='log'):
+    def export(self, path: str, name='log'):
         name += self.FORMAT
         try:
             os.makedirs(path)
@@ -40,4 +40,4 @@ class Logger:
             pass
 
         open(os.path.join(path, name), 'w').write("Log Export: {}\n".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-                                                                            + self.read_logger()))
+                                                                            + self.read()))

@@ -8,6 +8,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
 from kivy.core.window import Window
 
+from src import Constants
 from src.ui.ComplexButton import ComplexButton
 
 
@@ -59,9 +60,9 @@ class BackButton(TextButton):
 
 
 class OrionServer(App):
-    def __init__(self, const, **kwargs):
+    def __init__(self, **kwargs):
         super(OrionServer, self).__init__(**kwargs)
-        self.assets = const
+        self.assets = Constants.GUIFiles()
         self.kv_des = Builder.load_file(self.assets.KV_DES_FILE)
 
     def build(self):

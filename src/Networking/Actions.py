@@ -61,3 +61,10 @@ def gpu_name():
 def gpu_temp():
     return gpu.temperature
 
+
+def mute():
+    pass
+
+
+def sleep():
+    pass

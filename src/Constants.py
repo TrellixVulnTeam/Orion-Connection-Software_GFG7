@@ -8,8 +8,7 @@ def file_name(name, format='.png', path=str(str(Path.cwd() / 'res' / 'des'))):
 
 
 class GUIFiles:
-    def __init__(self, log):
-        self.log = log
+    def __init__(self):
 
         self.KV_DES_FILE = file_name("orion_server", format='.kv', path=str(Path.cwd() / 'res'))
         self.DEF_FONT = file_name("Orion", format='.ttf', path=str(Path.cwd() / 'res'))
@@ -25,27 +24,26 @@ class GUIFiles:
 
         self.files = [self.MAIN_SCREEN, self.ABOUT_SCREEN, self.CONNECT_SCREEN, self.LOGGER_SCREEN, self.ABOUT,
                       self.LOGGER, self.CONNECT, self.BACK_BTN, self.KV_DES_FILE, self.DEF_FONT]
-        self.check_files()
-
-    def check_files(self):
-        is_load = True
-        for file in self.files:
-            f = None
-            try:
-                f = open(file)
-
-            except FileNotFoundError:
-                is_load = False
-                self.log.write("ERROR loading {}".format(file))
-
-            if f is not None:
-                f.close()
-
-        if is_load:
-            self.log.write("Loaded ALL GUI")
+    #     self.check_files()
+    #
+    # def check_files(self):
+    #     is_load = True
+    #     for file in self.files:
+    #         f = None
+    #         try:
+    #             f = open(file)
+    #
+    #         except FileNotFoundError:
+    #             is_load = False
+    #             self.log.write("ERROR loading {}".format(file))
+    #
+    #         if f is not None:
+    #             f.close()
+    #
+    #     if is_load:
+    #         self.log.write("Loaded ALL GUI")
 
 
 class Network:   
-    COMM_PORT = 1690
-    BROAD_PORT = 1691
-    BROAD_IP = "239.255.255.254"
+    SERVER_PORT = 1690
+    SERVER_IP = "127.0.0.1"
