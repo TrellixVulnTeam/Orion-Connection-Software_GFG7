@@ -8,11 +8,19 @@ WindowManager:
     transition: NoTransition()
 
     MenuScreen:
+        id: MenuScreen
     ConnectScreen:
+        id: ConnectScreen
     ConnectPairScreen:
+        id: ConnectPairScreen
     ConnectIDScreen:
+        id: ConnectIDScreen
+    ConnectOfflineScreen:
+        id: ConnectOfflineScreen
     LoggerScreen:
+        id: LoggerScreen
     AboutScreen:
+        id: AboutScreen
     
 #=============================================
 
@@ -39,7 +47,7 @@ WindowManager:
             keep_ratio: True
 
             on_release: 
-                app.root.current = "ConnectScreen"
+                app.root.current = app.choose_connect_screen()
 
         ImageButton:
             id: logger_btn
@@ -57,11 +65,12 @@ WindowManager:
             keep_ratio: True
 
             on_release: 
-                app.root.current = "ConnectIDScreen"
+                app.root.current = "AboutScreen"
 
 
 <ConnectPairScreen>:
     name: "ConnectPairScreen"
+    id: ConnectPairScreen
     Image:
         source: app.assets.CONNECT_SCREEN
         size_hint: 1,1
@@ -86,10 +95,14 @@ WindowManager:
                 source: app.assets.PAIR_BTN
                 size_hint: 0.6, 0.6
                 keep_ratio: True
+                on_release: 
+                    app.update_id()
+                    app.root.current = "ConnectIDScreen"
 
 
         BackButton:
-    
+
+
 <ConnectIDScreen>:
     name: "ConnectIDScreen"
     Image:
@@ -112,6 +125,36 @@ WindowManager:
             size_hint: 0.7, 0.7
             pos_hint: {'center_x': 0.727, 'center_y': 0.22}
 
+
+
+        BackButton:
+
+<ConnectOfflineScreen>:
+    name: "ConnectOfflineScreen"
+    Image:
+        source: app.assets.CONNECT_SCREEN
+        size_hint: 1,1
+        keep_ratio: False
+        allow_stretch: True
+
+    FloatLayout:
+        Image:
+            source: app.assets.OFFLINE_TITLE
+            size_hint: 1,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            keep_ratio: False
+            allow_stretch: False
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 0.1, 0.1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            ImageButton:
+                id: discon_btn
+                source: app.assets.REFRESH_BTN
+                size_hint: 0.6, 0.6
+                keep_ratio: True
 
 
         BackButton:

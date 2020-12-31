@@ -38,6 +38,10 @@ class ConnectIDScreen(Screen):
     pass
 
 
+class ConnectOfflineScreen(Screen):
+    pass
+
+
 class LoggerScreen(Screen):
     pass
 
@@ -97,4 +101,15 @@ class OrionServer(App):
 
         return self.kv_des
 
+    def choose_connect_screen(self):
+        if not Constants.Network.IS_ONLINE:
+            return "ConnectOfflineScreen"
+        else:
+            if not Constants.Network.IS_PAIRED:
+                return "ConnectPairScreen"
+            else:
+                return "ConnectScreen"
 
+    def update_id(self):
+        text_input = self.root.ids.ConnectIDScreen.ids.id_widg
+        text_input.text = open(Constants.Files.ID, 'r').read()

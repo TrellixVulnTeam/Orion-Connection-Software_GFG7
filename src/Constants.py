@@ -18,7 +18,7 @@ class Files:
     """
     A const class that contains all the files paths.
     """
-    KV_DES_FILE = __file_name__("orion_server", format='.kv', path=str(Path.cwd() / 'res'))
+    KV_DES_FILE = __file_name__("orion_des", format='.kv', path=str(Path.cwd() / 'res'))
     DEF_FONT = __file_name__("Orion", format='.ttf', path=str(Path.cwd() / 'res'))
     ID = __file_name__("id", format='.txt', path=str(Path.cwd() / 'res'))
 
@@ -35,6 +35,8 @@ class Files:
     PAIR_BTN = __file_name__("PairBTN")
     DISCONNECT_BTN = __file_name__("DisconnectBTN")
     CONNECTED_TITLE = __file_name__("ConnectedTitle")
+    OFFLINE_TITLE = __file_name__("OfflineTitle")
+    REFRESH_BTN = __file_name__("RefreshBTN")
 
 
 class Network:
