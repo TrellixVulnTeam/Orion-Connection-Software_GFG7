@@ -62,8 +62,8 @@ class SessionManager:
                     pass
 
             elif incoming in NetworkPackets.NetLogicIncomes.list():
-                if incoming == NetworkPackets.NetLogicIncomes.INVALID:
-                    pass
+                if incoming == NetworkPackets.NetLogicIncomes.PAIRED.value: Constants.Network.IS_PAIRING = True
+                elif incoming == NetworkPackets.NetLogicIncomes.INVALID: pass
 
 
 class Operation(Enum):

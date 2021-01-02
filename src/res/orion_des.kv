@@ -126,7 +126,6 @@ WindowManager:
             pos_hint: {'center_x': 0.727, 'center_y': 0.22}
 
 
-
         BackButton:
 
 <ConnectOfflineScreen>:
@@ -155,6 +154,8 @@ WindowManager:
                 source: app.assets.REFRESH_BTN
                 size_hint: 0.6, 0.6
                 keep_ratio: True
+                on_release:
+                    app.refresh_connection()
 
 
         BackButton:
@@ -185,6 +186,8 @@ WindowManager:
                 source: app.assets.DISCONNECT_BTN
                 size_hint: 0.6, 0.6
                 keep_ratio: True
+                on_release:
+                    app.disconnect()
 
 
         BackButton:
@@ -197,8 +200,11 @@ WindowManager:
         size_hint: 1,1
         keep_ratio: False
         allow_stretch: True
-    
-    FloatLayout: 
+
+    LogView:
+        id: log_view
+
+    FloatLayout:
         BackButton:      
 
 <AboutScreen>:
@@ -209,7 +215,25 @@ WindowManager:
         keep_ratio: False
         allow_stretch: True
 
-    FloatLayout: 
+    FloatLayout:
+        Label:
+            id: info_text 
+            pos_hint: {'center_x': 0.53, 'center_y': 0.6}
+            markup: True
+            text: 
+                'By the development of: Ofek Harel ( AKA Horizon ).\nYear: 2020 + 2021.\n\n' +\
+                'This software is part of the Orion Connection tools that allows\n' +\
+                'to use the computer as if it was an I.O.T device.\n' +\
+                'For further info go to my [color=#0066CC][ref="link"]GitHub[/ref][/color]\n\n' +\
+                'This Project created using Python and KIVY.'
+            font_size: 32
+            text_size: self.size
+            halign: 'left'
+            valign: 'middle'
+            on_ref_press:
+                app.open_link()
+
+            
         BackButton:
 
 <BackButton>:

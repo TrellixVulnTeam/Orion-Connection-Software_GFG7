@@ -34,6 +34,7 @@ class NetCommands(Enum):
     APPROVAL = "APPROVAL"
     DISAPPROVAL = "DISAPPROVAL"
     ID_VAL = "ID_VAL"
+    DISCONNECT = "DISCON"
 
 
 class NetLogicIncomes(Enum):
@@ -42,3 +43,4 @@ class NetLogicIncomes(Enum):
     """
     VALID = "VALID"
     INVALID = "INVALID"
+    PAIRED = "HELLO"

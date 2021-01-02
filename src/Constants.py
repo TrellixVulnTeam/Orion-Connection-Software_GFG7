@@ -21,6 +21,7 @@ class Files:
     KV_DES_FILE = __file_name__("orion_des", format='.kv', path=str(Path.cwd() / 'res'))
     DEF_FONT = __file_name__("Orion", format='.ttf', path=str(Path.cwd() / 'res'))
     ID = __file_name__("id", format='.txt', path=str(Path.cwd() / 'res'))
+    LOG = __file_name__("EventLog", format='.log', path=str(Path.cwd()).replace('src', 'logs'))
 
     MAIN_SCREEN = __file_name__("Main")
     ABOUT_SCREEN = __file_name__("AboutScreen")
@@ -47,4 +48,5 @@ class Network:
     SERVER_IP = "127.0.0.1"
     IS_ONLINE = True
     IS_PAIRED = False
+    IS_PAIRING = False
 

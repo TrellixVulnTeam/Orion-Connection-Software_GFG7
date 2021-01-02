@@ -1,5 +1,6 @@
 import socket
 
+from src import Constants
 from src.networking import NetworkPackets
 from src.utils.Logger import utilLogger
 
@@ -10,6 +11,7 @@ class Client:
     """
     def __init__(self, host: str, address: tuple):
         self.client_sock = socket.socket()
+
         self.address = address
         self.host_name = host
 
@@ -26,6 +28,7 @@ class Client:
             valid = False
 
         finally:
+            Constants.Network.IS_ONLINE = valid
             return valid
 
     def send(self, msg: str):
@@ -48,6 +51,6 @@ class Client:
             return req.decode()
 
         except Exception as e:
-            print(e.__traceback__)
+            print(e)
 
 
