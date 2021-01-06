@@ -84,6 +84,7 @@ class IDTextWidget(TransTextInput):
         self.cursor_blink = False
         self.font_name = Constants.Files.DEF_FONT
         self.font_size = 140
+        self.readonly = True
 
 
 class LogView(ScrollView):
