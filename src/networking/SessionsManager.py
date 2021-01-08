@@ -61,6 +61,8 @@ class SessionManager:
                 elif incoming == Operation.DISCONNECT.value:
                     pass
 
+                self.client.send(NetworkPackets.assemble("CONFIRM"))
+
             elif incoming in NetworkPackets.NetLogicIncomes.list():
                 if incoming == NetworkPackets.NetLogicIncomes.PAIRED.value: Constants.Network.IS_PAIRING = True
                 elif incoming == NetworkPackets.NetLogicIncomes.INVALID: pass

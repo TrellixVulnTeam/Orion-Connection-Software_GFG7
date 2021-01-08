@@ -2,7 +2,6 @@ import os
 import ctypes
 from pynput.keyboard import Key, Controller
 import GPUtil
-import psutil
 
 from src.utils.Logger import appLogger
 
@@ -73,7 +72,7 @@ def gpu_temp():
 
 
 def mute():
-    pass
+    __sim_keyboard_press__(Key.media_volume_mute)
 
 
 def sleep():
