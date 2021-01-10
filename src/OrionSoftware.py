@@ -1,4 +1,5 @@
 from src import Constants
+from src.networking import NetworkPackets
 from src.networking.SessionsManager import SessionManager
 from src.ui.UIHandler import OrionServer
 import threading
@@ -62,6 +63,7 @@ class OrionSoftware:
 
 if __name__ == '__main__':
     software = OrionSoftware()
+    print(NetworkPackets.get_mac_add())
     software.start_comm()
     software.start_ui()
 

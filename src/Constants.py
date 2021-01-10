@@ -45,7 +45,7 @@ class Network:
     A const class That contains all th network params
     """
     SERVER_PORT = 1690
-    SERVER_IP = "127.0.0.1"
+    SERVER_IP = "192.168.1.10"
     IS_ONLINE = True
     IS_PAIRED = False
     IS_PAIRING = False

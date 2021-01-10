@@ -5,7 +5,7 @@ import GPUtil
 
 from src.utils.Logger import appLogger
 
-DEF_TIME = 15
+DEF_TIME = 5
 MSG = "By the command of Orion Connection"
 keyboard_sim = Controller()
 gpu = GPUtil.getGPUs()[0]
@@ -16,14 +16,14 @@ def __sim_keyboard_press__(key, keyboard=keyboard_sim):
     keyboard.release(key)
 
 
-def shut_down(with_timer=True, sec=DEF_TIME, with_msg=True):
-    command = r'shutdown /s{}{}'.format(r' /t ' + str(sec) if with_timer else "", r'/c ' + MSG if with_msg else "")
+def shut_down():
+    command = r'shutdown /s /t 10 /c By_The_Command_Of_Orion_Connection'
     os.system(command)
     appLogger.write("Shut Down")
 
 
-def restart(with_timer=True, sec=DEF_TIME, with_msg=True):
-    command = r'shutdown /r{}'.format(r' /t ' + str(sec) if with_timer else "", r'/c ' + MSG if with_msg else "")
+def restart():
+    command = r'shutdown /r /t 10 /c By_The_Command_Of_Orion_Connection'
     os.system(command)
     appLogger.write("Restart")
 
