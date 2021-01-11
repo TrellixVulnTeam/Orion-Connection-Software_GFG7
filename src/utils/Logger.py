@@ -58,6 +58,12 @@ class Logger:
         open(os.path.join(path, name), 'w').write("Log Export: {}\n".format(
             datetime.now().strftime("%d/%m/%Y %H:%M:%S") + self.read()))
 
+    def clean(self):
+        file = open(self.path, 'w')
+        file.truncate(0)
+        file.close()
+
+
 
 utilLogger = Logger("General", is_console=True)
 appLogger = Logger("EventLog", is_console=True)

@@ -1,3 +1,5 @@
+import os
+
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
@@ -55,6 +57,10 @@ class AboutScreen(Screen):
     pass
 
 
+class SettingsScreen(Screen):
+    pass
+
+
 '''
     Widgets & Utils
 '''
@@ -101,6 +107,9 @@ class LogView(ScrollView):
         self.text_log = open(Constants.Files.LOG, 'r').read().split('\n')
         self.index = len(self.text_log)
 
+        self.__init__grid()
+
+    def __init__grid(self):
         self.grid = GridLayout()
         self.grid.size_hint_y = None
         self.grid.cols = 1
@@ -125,6 +134,10 @@ class LogView(ScrollView):
             self.grid.height += widg.height
 
             self.grid.add_widget(widg)
+
+    def clean(self):
+        self.remove_widget(self.grid)
+        self.__init__grid()
 
 
 '''
@@ -191,3 +204,12 @@ class OrionServer(App):
 
     def open_link(self, *args):
         webbrowser.open("https://github.com/OfekHarel?tab=repositories")
+
+    def clean_log(self):
+        if self.root is not None:
+            appLogger.clean()
+            self.root.ids.LoggerScreen.ids.log_view.clean()
+
+    def export_log(self):
+        pass
+
