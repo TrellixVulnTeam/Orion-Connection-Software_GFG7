@@ -1,6 +1,6 @@
 from src import Constants
 from src.networking import NetworkPackets
-from src.networking.SessionsManager import SessionManager
+from src.networking.SessionsManager import SessionManager, Operation
 from src.ui.UIHandler import OrionServer
 import threading
 import time
@@ -42,7 +42,7 @@ class OrionSoftware:
             utilLogger.write("Reconnecting...")
             val = self.network.client.connect()
             if not val:
-                time.sleep(5)
+                time.sleep(7)
 
         self.network.sync()
         done = False
@@ -54,7 +54,8 @@ class OrionSoftware:
                     raise Exception
 
                 elif msg != "":
-                    self.network.manage(msg)
+                    val = self.network.manage(msg)
+
 
             except Exception as e:
                 print(e.__traceback__)

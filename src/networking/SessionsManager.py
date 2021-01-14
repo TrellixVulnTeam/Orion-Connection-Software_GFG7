@@ -28,13 +28,25 @@ class SessionManager:
         if Network.IS_ONLINE:
             is_valid = False
             num = 0
-            while not is_valid:
+            is_first = False
+            while not is_valid and not open(Constants.Files.ID, 'r').read().isnumeric():
+                is_first = True
                 num = randint(1000, 9999)
                 self.client.send(NetworkPackets.assemble("COMPUTER", "ID_VAL", str(num)))
                 msg = NetworkPackets.split(self.client.receive())
                 is_valid = msg[0] == NetworkPackets.NetLogicIncomes.VALID.value
 
-            open(Constants.Files.ID, 'w').write(str(num))
+            if is_first:
+                open(Constants.Files.ID, 'w').write(str(num))
+            else:
+                num = open(Constants.Files.ID, 'r').read()
+                is_valid = False
+                while not is_valid:
+                    self.client.send(NetworkPackets.assemble("COMPUTER", "ID_VAL", str(num)))
+                    msg = NetworkPackets.split(self.client.receive())
+                    is_valid = msg[0] == NetworkPackets.NetLogicIncomes.VALID.value
+                    if not is_valid:
+                        num = randint(1000, 9999)
 
     def manage(self, incoming: str):
         """
@@ -59,7 +71,8 @@ class SessionManager:
                 elif incoming == Operation.LOG_OUT.value: Actions.log_out()
 
                 elif incoming == Operation.DISCONNECT.value:
-                    pass
+                    self.client.send(NetworkPackets.assemble(Operation.DISCONNECT.value))
+                    return Operation.DISCONNECT
 
                 self.client.send(NetworkPackets.assemble("CONFIRM"))
 

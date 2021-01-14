@@ -88,9 +88,10 @@ class IDTextWidget(TransTextInput):
         super(TransTextInput, self).__init__(**kwargs)
         self.text = open(Constants.Files.ID, 'r').read()
         self.cursor_blink = False
-        self.font_name = Constants.Files.DEF_FONT
         self.font_size = 140
         self.readonly = True
+        self.font_name = Constants.Files.DEF_FONT
+
 
 
 class LogView(ScrollView):

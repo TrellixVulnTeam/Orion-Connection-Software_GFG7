@@ -10,6 +10,7 @@ def __file_name__(name: str, format='.png', path=str(str(Path.cwd() / 'res' / 'd
     :param path: The abs path of the file. Default is under .../res/des/
     :return: The full abs path of the file.
     """
+
     f = name + format
     return os.path.join(path, f)
 
@@ -42,6 +43,8 @@ class Files:
     REFRESH_BTN = __file_name__("RefreshBTN")
     EXPORT_LOG = __file_name__("ExportLog")
     CLEAN_LOG = __file_name__("CleanLog")
+    MINUS = __file_name__("minus")
+    PLUS = __file_name__("plus")
 
 
 class Network:
