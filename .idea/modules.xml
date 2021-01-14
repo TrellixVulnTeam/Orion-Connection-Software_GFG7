@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Orion-Connection-Server.iml" filepath="$PROJECT_DIR$/.idea/Orion-Connection-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Orion-Connection-Software.iml" filepath="$PROJECT_DIR$/.idea/Orion-Connection-Software.iml" />
     </modules>
   </component>
 </project>
