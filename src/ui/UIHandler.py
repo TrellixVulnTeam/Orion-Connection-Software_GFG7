@@ -93,7 +93,6 @@ class IDTextWidget(TransTextInput):
         self.font_name = Constants.Files.DEF_FONT
 
 
-
 class LogView(ScrollView):
     def __init__(self, **kwargs):
         super(LogView, self).__init__(**kwargs)
@@ -156,7 +155,7 @@ class OrionServer(App):
         Clock.schedule_interval(self.update_log, 5)
 
     def build(self):
-        self.title = "Orion Server" + chr(169)
+        self.title = "Orion Connection" + chr(169)
 
         Window.size = (GetSystemMetrics(0), GetSystemMetrics(1))
         Window.fullscreen = False

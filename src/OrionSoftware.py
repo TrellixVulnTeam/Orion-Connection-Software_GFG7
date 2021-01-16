@@ -1,6 +1,6 @@
 from src import Constants
 from src.networking import NetworkPackets
-from src.networking.SessionsManager import SessionManager, Operation
+from src.networking.SessionsManager import SessionManager
 from src.ui.UIHandler import OrionServer
 import threading
 import time
