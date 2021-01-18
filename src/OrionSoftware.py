@@ -42,7 +42,7 @@ class OrionSoftware:
             utilLogger.write("Reconnecting...")
             val = self.network.client.connect()
             if not val:
-                time.sleep(7)
+                time.sleep(10)
 
         self.network.sync()
         done = False

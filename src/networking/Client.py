@@ -14,6 +14,7 @@ class Client:
 
         self.address = address
         self.host_name = host
+        self.crypto = None
 
     def connect(self):
         """
@@ -31,26 +32,45 @@ class Client:
             Constants.Network.IS_ONLINE = valid
             return valid
 
-    def send(self, msg: str):
+    def send(self, msg: str) -> bool:
         """
         :param msg: The protocol based msg.
         """
-        size = str(len(msg)).zfill(NetworkPackets.HEADER)
-        self.client_sock.send(bytes(size.encode()))
-        self.client_sock.send(msg.encode())
-        print("send " + msg)
+        try:
+            if self.crypto is not None:
+                size = str(len(msg) * 4).zfill(NetworkPackets.HEADER)
+                self.client_sock.send(bytes(size.encode()))
+                msg = self.crypto.encrypt_message(msg)
+                self.client_sock.send(msg.encode('UTF-16LE'))
+            else:
+                size = str(len(msg)).zfill(NetworkPackets.HEADER)
+                self.client_sock.send(bytes(size.encode()))
+                self.client_sock.send(msg.encode())
 
-    def receive(self):
+            print("send {}->{}".format(size, msg))
+            return True
+
+        except Exception as e:
+            print(e.args)
+            return False
+
+    def receive(self) -> str or None:
         """
         :return: The raw decoded msg from the network.
         """
         try:
             size = int(str(self.client_sock.recv(NetworkPackets.HEADER).decode()))
-            req = self.client_sock.recv(size + 1)
-            print("recv " + req.decode())
-            return req.decode()
+            msg = self.client_sock.recv(size + 1)
+            if self.crypto is not None:
+                msg = self.crypto.decrypt_message(msg.decode('UTF-16LE'))
+            else:
+                msg = msg.decode()
+            print("recv {}->{}".format(size, msg))
+            return msg
 
         except Exception as e:
             print(e)
+            return None
+            pass
 
 

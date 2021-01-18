@@ -5,6 +5,7 @@ from src.networking import NetworkPackets, Actions
 
 from src.networking.Client import Client
 from src.Constants import Network
+from src.utils.DH_Encryption import Encryption
 from src.utils.Enum import Enum
 
 from random import randint
@@ -21,11 +22,23 @@ class SessionManager:
         if not self.val:
             Network.IS_ONLINE = False
 
+    def go_crypto(self):
+        msg = NetworkPackets.split(self.client.receive())
+        g = int(msg[1])
+        n = int(msg[2])
+        g_pow_a_mod_n = int(msg[3])
+        crypto = Encryption(g, n)
+        crypto.get_full_key(g_pow_a_mod_n)
+        self.client.send(NetworkPackets.assemble(NetworkPackets.NetLogicIncomes.CONNECT.value,
+                                                 str(crypto.get_partial_key())))
+        self.client.crypto = crypto
+
     def sync(self):
         """
         This function contains the full process of the sync phase.
         """
         if Network.IS_ONLINE:
+            self.go_crypto()
             is_valid = False
             num = 0
             is_first = False

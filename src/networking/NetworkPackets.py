@@ -50,3 +50,4 @@ class NetLogicIncomes(Enum):
     VALID = "VALID"
     INVALID = "INVALID"
     PAIRED = "HELLO"
+    CONNECT = "CONN"
