@@ -3,7 +3,7 @@ import random
 
 def generate_prime() -> int:
     min = 1
-    max = 100
+    max = 70
     cached_primes = [i for i in range(min, max) if __is_prime__(i)]
     n = random.choice(cached_primes)
     return n
@@ -21,7 +21,7 @@ def __is_prime__(num) -> bool:
 
 
 def generate_n() -> int:
-    min = 1000
+    min = 10000
     max = 100000
     num = random.randint(min, max)
     return num
@@ -43,6 +43,7 @@ class Encryption:
         return full_key
 
     def encrypt_message(self, message) -> str:
+        print("fuckthisfuck " + str(self.full_key))
         encrypted_message = ""
         for c in message:
             encrypted_message += chr(ord(c) + self.full_key)
