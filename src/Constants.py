@@ -49,12 +49,12 @@ class Files:
 
 class Network:
     """
-    A const class That contains all th network params
+    A const class That contains all th network params5000
     """
     SERVER_PORT = 1691
     LOCAL_IP = "127.0.0.1"
     PUBLIC_IP = "192.46.233.145"
-    IS_LOCAL = False
+    IS_LOCAL = True
     SERVER_IP = LOCAL_IP if IS_LOCAL else PUBLIC_IP
     IS_ONLINE = True
     IS_PAIRED = False
