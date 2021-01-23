@@ -110,3 +110,4 @@ class Operation(Enum):
     LOCK = "LCK"
     LOG_OUT = "LGOT"
     DISCONNECT = "DISCON"
+    MAGIC_BTN = "MAGIC"

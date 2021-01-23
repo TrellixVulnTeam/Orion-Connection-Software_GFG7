@@ -1,14 +1,12 @@
 import os
 import ctypes
 from pynput.keyboard import Key, Controller
-import GPUtil
-
+from pathlib import Path
 from src.utils.Logger import appLogger
 
 DEF_TIME = 5
 MSG = "By the command of Orion Connection"
 keyboard_sim = Controller()
-gpu = GPUtil.getGPUs()[0]
 
 
 def __sim_keyboard_press__(key, keyboard=keyboard_sim):
@@ -63,17 +61,19 @@ def vol_down():
     appLogger.write("Sound Vol Down")
 
 
-def gpu_name():
-    return gpu.name
-
-
-def gpu_temp():
-    return gpu.temperature
-
-
 def mute():
     __sim_keyboard_press__(Key.media_volume_mute)
 
 
 def sleep():
     pass
+
+
+def run_file(path: str, file: str):
+    cmd_str = ""
+    if file.find(".py") != -1:
+        cmd_str = "python "
+
+    cmd_str += str(os.path.join(path, file))
+    os.system(cmd_str)
+

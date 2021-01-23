@@ -43,8 +43,8 @@ class Files:
     REFRESH_BTN = __file_name__("RefreshBTN")
     EXPORT_LOG = __file_name__("ExportLog")
     CLEAN_LOG = __file_name__("CleanLog")
-    MINUS = __file_name__("minus")
-    PLUS = __file_name__("plus")
+    MAGIC_PATH_TXT = __file_name__("MagicPath")
+    MAGIC_PATH_INPUT = __file_name__("MagicPathInput")
 
 
 class Network:

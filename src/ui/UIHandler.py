@@ -81,6 +81,7 @@ class BackButton(TextButton):
 class TransTextInput(TextInput):
     def __init__(self, **kwargs):
         super(TransTextInput, self).__init__(**kwargs)
+        self.background_color = (0,0,0,0)
 
 
 class IDTextWidget(TransTextInput):
@@ -91,6 +92,18 @@ class IDTextWidget(TransTextInput):
         self.font_size = 140
         self.readonly = True
         self.font_name = Constants.Files.DEF_FONT
+
+
+class MagicPathInput(TextInput):
+    def __init__(self, **kwargs):
+        super(MagicPathInput, self).__init__(**kwargs)
+        self.background_color = (0,0,0,0)
+        self.foreground_color = (0, 0, 0, 1)
+        self.text = "Path"
+        self.cursor_blink = True
+        self.font_size = 25
+        self.cursor_color = (0, 0, 0, 1)
+        self.multiline = False
 
 
 class LogView(ScrollView):

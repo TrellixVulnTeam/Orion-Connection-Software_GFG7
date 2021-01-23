@@ -33,7 +33,7 @@ WindowManager:
         source: app.assets.MAIN_SCREEN
         size_hint: 1,1
         keep_ratio: False
-        allow_stretch: True
+        allow_stretch: False
     
     BoxLayout:
         orientation: 'vertical'
@@ -46,7 +46,8 @@ WindowManager:
             id: connect_btn
             source: app.assets.CONNECT
             size_hint: 0.5, 0.1
-            keep_ratio: True
+            keep_ratio: False
+            allow_stretch: False
 
             on_release: 
                 app.root.current = app.choose_connect_screen()
@@ -55,7 +56,8 @@ WindowManager:
             id: logger_btn
             source: app.assets.LOGGER
             size_hint: 0.5, 0.1
-            keep_ratio: True
+            keep_ratio: False
+            allow_stretch: False
 
             on_release: 
                 app.root.current = "LoggerScreen"
@@ -64,7 +66,8 @@ WindowManager:
             id: about_btn
             source: app.assets.SETTINGS
             size_hint: 0.5, 0.1
-            keep_ratio: True
+            keep_ratio: False
+            allow_stretch: False
 
             on_release: 
                 app.root.current = "SettingsScreen"
@@ -73,7 +76,8 @@ WindowManager:
             id: about_btn
             source: app.assets.ABOUT
             size_hint: 0.5, 0.1
-            keep_ratio: True
+            keep_ratio: False
+            allow_stretch: False
 
             on_release: 
                 app.root.current = "AboutScreen"
@@ -86,7 +90,7 @@ WindowManager:
         source: app.assets.CONNECT_SCREEN
         size_hint: 1,1
         keep_ratio: False
-        allow_stretch: True
+        allow_stretch: False
 
     FloatLayout:
         Image:
@@ -105,7 +109,8 @@ WindowManager:
                 id: pair_btn
                 source: app.assets.PAIR_BTN
                 size_hint: 0.6, 0.6
-                keep_ratio: True
+                keep_ratio: False
+                allow_stretch: False
                 on_release: 
                     app.update_id()
                     app.root.current = "ConnectIDScreen"
@@ -120,7 +125,7 @@ WindowManager:
         source: app.assets.CONNECT_SCREEN
         size_hint: 1,1
         keep_ratio: False
-        allow_stretch: True
+        allow_stretch: False
 
     FloatLayout:
         Image:
@@ -145,14 +150,14 @@ WindowManager:
         source: app.assets.CONNECT_SCREEN
         size_hint: 1,1
         keep_ratio: False
-        allow_stretch: True
+        allow_stretch: False
 
     FloatLayout:
         Image:
             source: app.assets.OFFLINE_TITLE
             size_hint: 1,1
             pos_hint: {'center_x': 0.5, 'center_y': 0.6}
-            keep_ratio: False
+            keep_ratio: True
             allow_stretch: False
 
         BoxLayout:
@@ -164,11 +169,12 @@ WindowManager:
                 id: discon_btn
                 source: app.assets.REFRESH_BTN
                 size_hint: 0.6, 0.6
-                keep_ratio: True
+                keep_ratio: False
+                allow_stretch: False
                 on_release:
                     app.refresh_connection()
 
-
+    
         BackButton:
 
 <ConnectScreen>:
@@ -177,7 +183,7 @@ WindowManager:
         source: app.assets.CONNECT_SCREEN
         size_hint: 1,1
         keep_ratio: False
-        allow_stretch: True
+        allow_stretch: False
 
     FloatLayout:
         Image:
@@ -196,7 +202,8 @@ WindowManager:
                 id: discon_btn
                 source: app.assets.DISCONNECT_BTN
                 size_hint: 0.6, 0.6
-                keep_ratio: True
+                keep_ratio: False
+                allow_stretch: False
                 on_release:
                     app.disconnect()
 
@@ -210,7 +217,7 @@ WindowManager:
         source: app.assets.LOGGER_SCREEN
         size_hint: 1,1
         keep_ratio: False
-        allow_stretch: True
+        allow_stretch: False
 
     LogView:
         id: log_view
@@ -224,7 +231,7 @@ WindowManager:
         source: app.assets.SETTINGS_SCREEN
         size_hint: 1,1
         keep_ratio: False
-        allow_stretch: True
+        allow_stretch: False
 
     FloatLayout:
         BoxLayout:
@@ -236,6 +243,7 @@ WindowManager:
                 id: clean_log
                 source: app.assets.EXPORT_LOG
                 keep_ratio: False
+                allow_stretch: False
                 size_hint: 0.8, 0.8
                 on_release:
                     app.export_log()
@@ -250,9 +258,29 @@ WindowManager:
                 id: clean_log
                 source: app.assets.CLEAN_LOG
                 keep_ratio: False
+                allow_stretch: False
                 size_hint: 0.8, 0.8
                 on_release:
                     app.clean_log()
+
+    FloatLayout:
+        Image:
+            source: app.assets.MAGIC_PATH_TXT
+            keep_ratio: False
+            allow_stretch: False
+            size_hint: 0.151, 0.151
+            pos_hint: {'center_x': 0.1, 'center_y': 0.6}
+
+        Image:
+            source: app.assets.MAGIC_PATH_INPUT
+            keep_ratio: True
+            allow_stretch: True
+            size_hint: 0.3, 0.06
+            pos_hint: {'center_x': 0.35, 'center_y': 0.6}
+
+        MagicPathInput:
+            size_hint: 0.3, 0.04
+            pos_hint: {'center_x': 0.35, 'center_y': 0.6}
 
     BackButton:
 
@@ -261,7 +289,7 @@ WindowManager:
     Image:
         source: app.assets.ABOUT_SCREEN
         size_hint: 1,1
-        keep_ratio: False
+        keep_ratio: True
         allow_stretch: True
 
     FloatLayout:
@@ -298,7 +326,6 @@ WindowManager:
 <TransTextInput>:
     multiline: False
     foreground_color: (1,0,1,1)
-    background_color: (0,0,0,0)
     cursor_color: (1, 1, 1, 0.971)
     cursor_width: 1
     coulor: (1, 1, 1, 1)
