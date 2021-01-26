@@ -7,6 +7,7 @@ from src.utils.Logger import appLogger
 DEF_TIME = 5
 MSG = "By the command of Orion Connection"
 keyboard_sim = Controller()
+MAGIC_FILE = ""
 
 
 def __sim_keyboard_press__(key, keyboard=keyboard_sim):
@@ -69,11 +70,14 @@ def sleep():
     pass
 
 
-def run_file(path: str, file: str):
-    cmd_str = ""
-    if file.find(".py") != -1:
-        cmd_str = "python "
+def run_file():
+    if MAGIC_FILE is not None:
+        file_index = MAGIC_FILE.find(MAGIC_FILE.split("/")[len(MAGIC_FILE.split("/")) - 1])
+        file = MAGIC_FILE[file_index:]
+        path = MAGIC_FILE[:file_index - 1]
+        cmd_str = ""
+        if file.find(".py") != -1:
+            cmd_str = "python "
 
-    cmd_str += str(os.path.join(path, file))
-    os.system(cmd_str)
-
+        cmd_str += str(os.path.join(path, file))
+        os.system(cmd_str)

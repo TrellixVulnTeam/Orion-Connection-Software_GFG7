@@ -14,7 +14,7 @@ from kivy.uix.image import Image
 from kivy.core.window import Window
 
 from src import Constants
-from src.networking import NetworkPackets
+from src.networking import NetworkPackets, Actions
 from src.ui.ComplexButton import ComplexButton
 import webbrowser
 
@@ -226,3 +226,6 @@ class OrionServer(App):
     def export_log(self):
         pass
 
+    def transfer_magic(self):
+        if self.root is not None:
+            Actions.MAGIC_FILE = self.root.ids.SettingsScreen.ids.magic_file_input.text

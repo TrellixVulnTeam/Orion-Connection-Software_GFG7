@@ -279,8 +279,11 @@ WindowManager:
             pos_hint: {'center_x': 0.35, 'center_y': 0.6}
 
         MagicPathInput:
+            id: magic_file_input
             size_hint: 0.3, 0.04
             pos_hint: {'center_x': 0.35, 'center_y': 0.6}
+            on_text_validate:
+                app.transfer_magic()
 
     BackButton:
 

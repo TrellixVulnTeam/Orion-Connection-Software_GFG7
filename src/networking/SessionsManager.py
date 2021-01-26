@@ -82,6 +82,7 @@ class SessionManager:
                 elif incoming == Operation.RESTART.value: Actions.restart()
                 elif incoming == Operation.LOCK.value: Actions.lock()
                 elif incoming == Operation.LOG_OUT.value: Actions.log_out()
+                elif incoming == Operation.MAGIC_BTN.value: Actions.run_file()
 
                 elif incoming == Operation.DISCONNECT.value:
                     self.client.send(NetworkPackets.assemble(Operation.DISCONNECT.value))
