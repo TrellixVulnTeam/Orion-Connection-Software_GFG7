@@ -15,6 +15,7 @@ class SessionManager:
     """
     This class is responsible for dealing with any flow of net msgs.
     """
+
     def __init__(self):
         address = (Network.SERVER_IP, Network.SERVER_PORT)
         self.client = Client(str(socket.gethostname()), address)
@@ -71,28 +72,41 @@ class SessionManager:
             print(incoming)
             if incoming in Operation.list():
 
-                if incoming == Operation.VOL_UP.value: Actions.vol_up()
-                elif incoming == Operation.VOL_DOWN.value: Actions.vol_down()
-                elif incoming == Operation.PAUSE_PLAY_TOGGLE.value: Actions.play_pause()
-                elif incoming == Operation.SKIP.value: Actions.next_song()
-                elif incoming == Operation.PREV.value: Actions.prev_song()
-                elif incoming == Operation.MUTE.value: Actions.mute()
-                elif incoming == Operation.OFF.value: Actions.shut_down()
-                elif incoming == Operation.SLEEP.value: Actions.sleep()
-                elif incoming == Operation.RESTART.value: Actions.restart()
-                elif incoming == Operation.LOCK.value: Actions.lock()
-                elif incoming == Operation.LOG_OUT.value: Actions.log_out()
-                elif incoming == Operation.MAGIC_BTN.value: Actions.run_file()
+                if incoming == Operation.VOL_UP.value:
+                    Actions.vol_up()
+                elif incoming == Operation.VOL_DOWN.value:
+                    Actions.vol_down()
+                elif incoming == Operation.PAUSE_PLAY_TOGGLE.value:
+                    Actions.play_pause()
+                elif incoming == Operation.SKIP.value:
+                    Actions.next_song()
+                elif incoming == Operation.PREV.value:
+                    Actions.prev_song()
+                elif incoming == Operation.MUTE.value:
+                    Actions.mute()
+                elif incoming == Operation.OFF.value:
+                    Actions.shut_down()
+                elif incoming == Operation.SLEEP.value:
+                    Actions.sleep()
+                elif incoming == Operation.RESTART.value:
+                    Actions.restart()
+                elif incoming == Operation.LOCK.value:
+                    Actions.lock()
+                elif incoming == Operation.LOG_OUT.value:
+                    Actions.log_out()
+                elif incoming == Operation.MAGIC_BTN.value:
+                    Actions.run_file()
 
                 elif incoming == Operation.DISCONNECT.value:
                     self.client.send(NetworkPackets.assemble(Operation.DISCONNECT.value))
                     return Operation.DISCONNECT
 
-                self.client.send(NetworkPackets.assemble("CONFIRM"))
-
             elif incoming in NetworkPackets.NetLogicIncomes.list():
-                if incoming == NetworkPackets.NetLogicIncomes.PAIRED.value: Constants.Network.IS_PAIRING = True
-                elif incoming == NetworkPackets.NetLogicIncomes.INVALID: pass
+                if incoming == NetworkPackets.NetLogicIncomes.PAIRED.value:
+                    Constants.Network.IS_PAIRING = True
+                    self.client.send(NetworkPackets.assemble(arr=Actions.COMPUTER.get_as_str_arr()))
+                elif incoming == NetworkPackets.NetLogicIncomes.INVALID:
+                    pass
 
 
 class Operation(Enum):
@@ -112,3 +126,4 @@ class Operation(Enum):
     LOG_OUT = "LGOT"
     DISCONNECT = "DISCON"
     MAGIC_BTN = "MAGIC"
+    SPECS_INFO = "SPECS"

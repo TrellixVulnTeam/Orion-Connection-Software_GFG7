@@ -2,18 +2,25 @@ import uuid
 from src.utils.Enum import Enum
 
 SEP = "!"
-HEADER = 3
+HEADER = 4
 
 
-def assemble(*msg: str):
+def assemble(*msg: str, arr=None):
     """
     This function will create a string that follows the protocol.
+    :param arr:
     :param msg: Strings to create the protocol string
     :return: The full protocol string
     """
+    print(msg)
     final = ''
-    for request in msg:
-        final += "{}{}".format(request, SEP)
+    if arr is None:
+        for request in msg:
+            final += "{}{}".format(request, SEP)
+    else:
+        print(arr)
+        for msg in arr:
+            final += "{}{}".format(msg, SEP)
 
     return final
 

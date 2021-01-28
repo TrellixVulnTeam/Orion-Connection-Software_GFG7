@@ -1,13 +1,15 @@
 import os
 import ctypes
 from pynput.keyboard import Key, Controller
-from pathlib import Path
+
+from src.utils.Computer import Computer
 from src.utils.Logger import appLogger
 
 DEF_TIME = 5
 MSG = "By the command of Orion Connection"
 keyboard_sim = Controller()
 MAGIC_FILE = ""
+COMPUTER = Computer()
 
 
 def __sim_keyboard_press__(key, keyboard=keyboard_sim):
@@ -72,12 +74,9 @@ def sleep():
 
 def run_file():
     if MAGIC_FILE is not None:
-        file_index = MAGIC_FILE.find(MAGIC_FILE.split("/")[len(MAGIC_FILE.split("/")) - 1])
-        file = MAGIC_FILE[file_index:]
-        path = MAGIC_FILE[:file_index - 1]
-        cmd_str = ""
-        if file.find(".py") != -1:
-            cmd_str = "python "
-
-        cmd_str += str(os.path.join(path, file))
-        os.system(cmd_str)
+        if MAGIC_FILE.endswith(".py"):
+            pass
+        elif MAGIC_FILE.endswith(".exe"):
+            pass
+        elif MAGIC_FILE.startswith("www."):
+            pass
