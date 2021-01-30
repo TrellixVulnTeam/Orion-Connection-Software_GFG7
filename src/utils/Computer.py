@@ -20,7 +20,7 @@ class Computer:
         return str(math.ceil(float(self.os_info.TotalVisibleMemorySize) / 1048576))
 
     def get_cpu(self) -> str:
-        return self.proc_info.Name
+        return self.proc_info.Name.replace(" CPU @ ", " - ")
     
     def get_gpu(self) -> str:
         return self.gpus_info[0].Name if len(self.gpus_info) < 2 else self.gpus_info[1].Name
@@ -33,7 +33,3 @@ class Computer:
 
     def get_as_str_arr(self):
         return ["SPECS", self.get_os_name(), self.get_ram(), self.get_cpu(), self.get_gpu()]
-
-
-if __name__ == '__main__':
-    print(Computer().get_as_str_arr())

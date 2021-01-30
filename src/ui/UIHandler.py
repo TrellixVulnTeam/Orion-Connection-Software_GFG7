@@ -81,7 +81,6 @@ class BackButton(TextButton):
 class TransTextInput(TextInput):
     def __init__(self, **kwargs):
         super(TransTextInput, self).__init__(**kwargs)
-        self.background_color = (0,0,0,0)
 
 
 class IDTextWidget(TransTextInput):

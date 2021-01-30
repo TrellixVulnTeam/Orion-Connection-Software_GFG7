@@ -64,6 +64,5 @@ class Logger:
         file.close()
 
 
-
 utilLogger = Logger("General", is_console=True)
 appLogger = Logger("EventLog", is_console=True)
