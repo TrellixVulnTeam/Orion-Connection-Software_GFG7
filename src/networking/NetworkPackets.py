@@ -42,12 +42,13 @@ def get_mac_add():
 
 class NetCommands(Enum):
     """
-    All the msgs type that the computer can send to the server by it's self.
+    All the msgs type that the computer_wmi can send to the server by it's self.
     """
     APPROVAL = "APPROVAL"
     DISAPPROVAL = "DISAPPROVAL"
     ID_VAL = "ID_VAL"
     DISCONNECT = "DISCON"
+    USAGE = "USE"
 
 
 class NetLogicIncomes(Enum):

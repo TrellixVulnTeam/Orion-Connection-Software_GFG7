@@ -69,7 +69,6 @@ class SessionManager:
         """
         if Network.IS_ONLINE:
             incoming = NetworkPackets.split(incoming)[0]
-            print(incoming)
             if incoming in Operation.list():
 
                 if incoming == Operation.VOL_UP.value:
@@ -96,6 +95,8 @@ class SessionManager:
                     Actions.log_out()
                 elif incoming == Operation.MAGIC_BTN.value:
                     Actions.run_file()
+                elif incoming == Operation.USAGE.value:
+                    self.client.send(NetworkPackets.assemble(arr=Actions.COMPUTER.get_use_as_str_arr()))
 
                 elif incoming == Operation.DISCONNECT.value:
                     self.client.send(NetworkPackets.assemble(Operation.DISCONNECT.value))
@@ -104,7 +105,7 @@ class SessionManager:
             elif incoming in NetworkPackets.NetLogicIncomes.list():
                 if incoming == NetworkPackets.NetLogicIncomes.PAIRED.value:
                     Constants.Network.IS_PAIRING = True
-                    self.client.send(NetworkPackets.assemble(arr=Actions.COMPUTER.get_as_str_arr()))
+                    self.client.send(NetworkPackets.assemble(arr=Actions.COMPUTER.get_specs_as_str_arr()))
                 elif incoming == NetworkPackets.NetLogicIncomes.INVALID:
                     pass
 
@@ -127,3 +128,4 @@ class Operation(Enum):
     DISCONNECT = "DISCON"
     MAGIC_BTN = "MAGIC"
     SPECS_INFO = "SPECS"
+    USAGE = "USE"
