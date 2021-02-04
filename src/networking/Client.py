@@ -9,6 +9,7 @@ class Client:
     """
     The Client class that
     """
+
     def __init__(self, host: str, address: tuple):
         self.client_sock = socket.socket()
 
@@ -20,17 +21,10 @@ class Client:
         """
         :return: The connection Validation.
         """
-        valid = True
-        try:
-            self.client_sock.connect(self.address)
-
-        except ConnectionRefusedError as err:
-            utilLogger.write("Connection timeout! --> {}".format(err))
-            valid = False
-
-        finally:
-            Constants.Network.IS_ONLINE = valid
-            return valid
+        val = self.client_sock.connect_ex(self.address)
+        print(str(val) + " 011111111")
+        Constants.Network.IS_ONLINE = val == 0
+        return Constants.Network.IS_ONLINE
 
     def send(self, msg: str) -> bool:
         """
@@ -71,6 +65,3 @@ class Client:
         except Exception as e:
             print(e)
             return None
-            pass
-
-

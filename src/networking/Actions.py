@@ -1,5 +1,6 @@
-import os
 import ctypes
+import os
+
 from pynput.keyboard import Key, Controller
 
 from src.utils.Computer import Computer

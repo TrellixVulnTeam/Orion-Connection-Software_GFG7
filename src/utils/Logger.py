@@ -59,6 +59,9 @@ class Logger:
             datetime.now().strftime("%d/%m/%Y %H:%M:%S") + self.read()))
 
     def clean(self):
+        """
+        This function cleans the log file.
+        """
         file = open(self.path, 'w')
         file.truncate(0)
         file.close()

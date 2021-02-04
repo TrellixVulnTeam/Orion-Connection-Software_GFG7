@@ -1,23 +1,20 @@
-import os
+import webbrowser
 
 from kivy.app import App
+from kivy.clock import Clock
+from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.image import Image
 from kivy.uix.label import Label
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.textinput import TextInput
-from kivy.clock import Clock
 from win32api import GetSystemMetrics
-
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.image import Image
-from kivy.core.window import Window
 
 from src import Constants
 from src.networking import NetworkPackets, Actions
 from src.ui.ComplexButton import ComplexButton
-import webbrowser
-
 from src.utils.Logger import appLogger
 
 '''
@@ -86,7 +83,18 @@ class TransTextInput(TextInput):
 class IDTextWidget(TransTextInput):
     def __init__(self, **kwargs):
         super(TransTextInput, self).__init__(**kwargs)
-        self.text = open(Constants.Files.ID, 'r').read()
+        self.file = None
+        try:
+            self.file = open(Constants.Files.ID, 'r')
+        except Exception:
+            self.file = open(Constants.Files.ID, 'x')
+        finally:
+            try:
+                self.text = self.file.read()
+                self.file.close()
+            except Exception:
+                self.text = ""
+
         self.cursor_blink = False
         self.font_size = 140
         self.readonly = True
@@ -96,7 +104,7 @@ class IDTextWidget(TransTextInput):
 class MagicPathInput(TextInput):
     def __init__(self, **kwargs):
         super(MagicPathInput, self).__init__(**kwargs)
-        self.background_color = (0,0,0,0)
+        self.background_color = (0, 0, 0, 0)
         self.foreground_color = (0, 0, 0, 1)
         self.text = "Path"
         self.cursor_blink = True
@@ -137,7 +145,7 @@ class LogView(ScrollView):
             widg = Label(text=log)
             widg.size_hint_y = None
             widg.font_size = 36
-            widg.padding = (0,0)
+            widg.padding = (0, 0)
             widg.height = 50
             widg.valign = 'middle'
             widg.halign = 'left'
@@ -210,7 +218,7 @@ class OrionServer(App):
                 file = open(Constants.Files.LOG, 'r').read().split('\n')
                 current_index = len(file)
                 if current_index > self.root.ids.LoggerScreen.ids.log_view.index:
-                    self.root.ids.LoggerScreen.ids.log_view.\
+                    self.root.ids.LoggerScreen.ids.log_view. \
                         write(file[self.root.ids.LoggerScreen.ids.log_view.index - 1:])
                     self.root.ids.LoggerScreen.ids.log_view.index = current_index
 

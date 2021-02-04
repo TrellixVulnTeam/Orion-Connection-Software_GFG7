@@ -1,9 +1,11 @@
-from src import Constants
-from src.networking import NetworkPackets
-from src.networking.SessionsManager import SessionManager
-from src.ui.UIHandler import OrionServer
 import threading
 import time
+import socket
+
+
+from src import Constants
+from src.networking.SessionsManager import SessionManager
+from src.ui.UIHandler import OrionServer
 from src.utils.Logger import utilLogger
 
 
@@ -11,6 +13,7 @@ class OrionSoftware:
     """
     The main class that contains the ui and the network handlers.
     """
+
     def __init__(self):
         self.network = SessionManager()
         self.net_thread = None
@@ -38,34 +41,34 @@ class OrionSoftware:
         """
         The in going communication flow
         """
-        while not Constants.Network.IS_ONLINE:
-            utilLogger.write("Reconnecting...")
-            val = self.network.client.connect()
-            if not val:
-                time.sleep(10)
+        while True:
+            while not Constants.Network.IS_ONLINE:
+                val = self.network.client.connect()
+                if not val:
+                    utilLogger.write("Reconnecting...")
+                    time.sleep(10)
 
-        self.network.sync()
-        done = False
-        while not done:
-            try:
-                msg = self.network.client.receive()
+            self.network.sync()
+            done = False
+            while not done:
+                try:
+                    msg = self.network.client.receive()
 
-                if msg is None:
-                    raise Exception
+                    if msg is None:
+                        done = True
 
-                elif msg != "":
-                    val = self.network.manage(msg)
+                    elif msg != "":
+                        self.network.manage(msg)
 
+                except Exception:
+                    done = True
 
-            except Exception as e:
-                print(e.__traceback__)
-                done = True
+            Constants.Network.IS_ONLINE = False
+            self.network.client.client_sock = socket.socket()
+            self.network.client.crypto = None
 
 
 if __name__ == '__main__':
     software = OrionSoftware()
-    print(NetworkPackets.get_mac_add())
     software.start_comm()
     software.start_ui()
-
-

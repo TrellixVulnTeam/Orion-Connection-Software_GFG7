@@ -1,14 +1,13 @@
+import os
 import socket
+from random import randint
 
 from src import Constants
-from src.networking import NetworkPackets, Actions
-
-from src.networking.Client import Client
 from src.Constants import Network
+from src.networking import NetworkPackets, Actions
+from src.networking.Client import Client
 from src.utils.DH_Encryption import Encryption
 from src.utils.Enum import Enum
-
-from random import randint
 
 
 class SessionManager:
@@ -34,33 +33,57 @@ class SessionManager:
                                                  str(crypto.get_partial_key())))
         self.client.crypto = crypto
 
+    def gen_id(self) -> str:
+        num = str(randint(1, 9999))
+        num = num.zfill(4)
+        return num
+
+    def open_id_file(self):
+        try:
+            open(Constants.Files.ID, 'r+').close()
+        except FileNotFoundError:
+            open(Constants.Files.ID, 'x').close()
+        finally:
+            file = open(Constants.Files.ID, 'r+')
+            return file
+
     def sync(self):
         """
         This function contains the full process of the sync phase.
         """
         if Network.IS_ONLINE:
             self.go_crypto()
-            is_valid = False
-            num = 0
-            is_first = False
-            while not is_valid and not open(Constants.Files.ID, 'r').read().isnumeric():
-                is_first = True
-                num = randint(1000, 9999)
-                self.client.send(NetworkPackets.assemble("COMPUTER", "ID_VAL", str(num)))
-                msg = NetworkPackets.split(self.client.receive())
-                is_valid = msg[0] == NetworkPackets.NetLogicIncomes.VALID.value
+            num = ""
+            file = self.open_id_file()
 
-            if is_first:
-                open(Constants.Files.ID, 'w').write(str(num))
-            else:
-                num = open(Constants.Files.ID, 'r').read()
+            if os.path.getsize(Constants.Files.ID) == 0:  # Empty
                 is_valid = False
                 while not is_valid:
-                    self.client.send(NetworkPackets.assemble("COMPUTER", "ID_VAL", str(num)))
+                    num = self.gen_id()
+                    self.client.send(NetworkPackets.assemble("COMPUTER", "ID_VAL", num))
                     msg = NetworkPackets.split(self.client.receive())
                     is_valid = msg[0] == NetworkPackets.NetLogicIncomes.VALID.value
+
+                file.write(num)
+
+            else:
+                is_valid = False
+                num = file.read()
+                while not is_valid:
+                    self.client.send(NetworkPackets.assemble("COMPUTER", "ID_VAL", num))
+                    msg = NetworkPackets.split(self.client.receive())
+                    is_valid = msg[0] == NetworkPackets.NetLogicIncomes.VALID.value
+                    print(str(is_valid))
                     if not is_valid:
-                        num = randint(1000, 9999)
+                        num = self.gen_id()
+
+                if num != file.read():
+                    file.close()
+                    os.remove(Constants.Files.ID)
+                    file = self.open_id_file()
+                    file.write(num)
+
+            file.close()
 
     def manage(self, incoming: str):
         """

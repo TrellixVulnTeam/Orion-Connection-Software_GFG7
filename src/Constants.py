@@ -1,5 +1,5 @@
-from pathlib import Path
 import os
+from pathlib import Path
 
 
 def __file_name__(name: str, format='.png', path=str(str(Path.cwd() / 'res' / 'des'))) -> str:
@@ -59,4 +59,3 @@ class Network:
     IS_ONLINE = True
     IS_PAIRED = False
     IS_PAIRING = False
-
