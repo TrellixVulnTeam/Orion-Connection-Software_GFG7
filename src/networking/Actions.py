@@ -1,5 +1,6 @@
 import ctypes
 import os
+import webbrowser
 
 from pynput.keyboard import Key, Controller
 
@@ -74,10 +75,12 @@ def sleep():
 
 
 def run_file():
-    if MAGIC_FILE is not None:
-        if MAGIC_FILE.endswith(".py"):
-            pass
-        elif MAGIC_FILE.endswith(".exe"):
-            pass
-        elif MAGIC_FILE.startswith("www."):
-            pass
+    # if MAGIC_FILE is not None:
+    #     if MAGIC_FILE.endswith(".py"):
+    #         pass
+    #     elif MAGIC_FILE.endswith(".exe"):
+    #         pass
+    #     elif MAGIC_FILE.startswith("www."):
+    #         pass
+    webbrowser.open("https://music.apple.com/us/browse")
+
