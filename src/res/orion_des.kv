@@ -37,8 +37,8 @@ WindowManager:
     
     BoxLayout:
         orientation: 'vertical'
-        size_hint: 0.5, 0.5
-        pos_hint: {'center_x': 0.6, 'center_y': 0.4}
+        size_hint: 0.65, 0.65
+        pos_hint: {'center_x': 0.6, 'center_y': 0.35}
         padding: 100
         spacing: 40
 
@@ -139,7 +139,7 @@ WindowManager:
         IDTextWidget:
             id: id_widg
             size_hint: 0.7, 0.7
-            pos_hint: {'center_x': 0.727, 'center_y': 0.22}
+            pos_hint: {'center_x': 0.7, 'center_y': 0.25}
 
 
         BackButton:
@@ -280,8 +280,8 @@ WindowManager:
 
         MagicPathInput:
             id: magic_file_input
-            size_hint: 0.3, 0.04
-            pos_hint: {'center_x': 0.35, 'center_y': 0.6}
+            size_hint: 0.5, 0.05
+            pos_hint: {'center_x': 0.46, 'center_y': 0.6}
             on_text_validate:
                 app.transfer_magic()
 
@@ -320,7 +320,7 @@ WindowManager:
     text: "Back"
     font_name: app.assets.DEF_FONT
     size_hint: None, None
-    pos_hint: {"right": 0.98, "bottom": 0.9}
+    pos_hint: {"right": 0.92, "bottom": 0.9}
     font_size: 46
 
     on_release:
