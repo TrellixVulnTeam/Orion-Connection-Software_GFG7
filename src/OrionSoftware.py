@@ -15,6 +15,7 @@ class OrionSoftware:
     """
 
     def __init__(self):
+        utilLogger.clean()
         self.network = SessionManager()
         self.net_thread = None
 

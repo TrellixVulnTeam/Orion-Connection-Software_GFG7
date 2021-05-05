@@ -22,7 +22,6 @@ class Client:
         :return: The connection Validation.
         """
         val = self.client_sock.connect_ex(self.address)
-        print(str(val) + " 011111111")
         Constants.Network.IS_ONLINE = val == 0
         return Constants.Network.IS_ONLINE
 
@@ -41,11 +40,9 @@ class Client:
                 self.client_sock.send(bytes(size.encode("utf-8")))
                 self.client_sock.send(msg.encode("utf-8"))
 
-            print("send {}->{}".format(size, msg))
             return True
 
         except Exception as e:
-            print(e.args)
             return False
 
     def receive(self) -> str or None:
@@ -59,9 +56,7 @@ class Client:
                 msg = self.crypto.decrypt_message(msg.decode('UTF-16LE'))
             else:
                 msg = msg.decode("utf-8", "ignore")
-            print("recv {}->{}".format(size, msg))
             return msg
 
         except Exception as e:
-            print(e)
             return None

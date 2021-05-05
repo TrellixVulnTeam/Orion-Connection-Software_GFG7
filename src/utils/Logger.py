@@ -55,11 +55,10 @@ class Logger:
         path = os.path.join(expPath, "OrionLogs")
 
         try:
-            print(os.path.join(path, name))
             os.makedirs(path)
 
         except FileExistsError as e:
-            print(e)
+            pass
 
         name += self.FORMAT
         file = open(os.path.join(path, name), 'w')

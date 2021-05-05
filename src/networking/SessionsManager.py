@@ -73,7 +73,6 @@ class SessionManager:
                     self.client.send(NetworkPackets.assemble("COMPUTER", "ID_VAL", num))
                     msg = NetworkPackets.split(self.client.receive())
                     is_valid = msg[0] == NetworkPackets.NetLogicIncomes.VALID.value
-                    print(str(is_valid))
                     if not is_valid:
                         num = self.gen_id()
 

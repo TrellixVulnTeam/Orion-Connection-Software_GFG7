@@ -13,13 +13,11 @@ def assemble(*msg: str, arr=None):
     :param msg: Strings to create the protocol string
     :return: The full protocol string
     """
-    print(msg)
     final = ''
     if arr is None:
         for request in msg:
             final += "{}{}".format(request, SEP)
     else:
-        print(arr)
         for msg in arr:
             final += "{}{}".format(msg, SEP)
 
