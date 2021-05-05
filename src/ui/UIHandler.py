@@ -1,3 +1,4 @@
+import os
 import webbrowser
 
 from kivy.app import App
@@ -16,6 +17,7 @@ from src import Constants
 from src.networking import NetworkPackets, Actions
 from src.ui.ComplexButton import ComplexButton
 from src.utils.Logger import appLogger
+
 
 '''
     Screens
@@ -124,7 +126,10 @@ class LogView(ScrollView):
         self.do_scroll_x = False
         self.do_scroll_y = True
 
-        self.text_log = open(Constants.Files.LOG, 'r').read().split('\n')
+        file = open(Constants.Files.LOG, 'r')
+        self.text_log = file.read().split('\n')
+        file.close()
+
         self.index = len(self.text_log)
 
         self.__init__grid()
@@ -156,9 +161,8 @@ class LogView(ScrollView):
             self.grid.add_widget(widg)
 
     def clean(self):
-        self.remove_widget(self.grid)
-        self.__init__grid()
-
+        appLogger.clean()
+        self.grid.clear_widgets()
 
 '''
     App
@@ -215,11 +219,13 @@ class OrionServer(App):
     def update_log(self, *args):
         if self.root is not None:
             if self.root.current == "LoggerScreen":
-                file = open(Constants.Files.LOG, 'r').read().split('\n')
-                current_index = len(file)
+                file = open(Constants.Files.LOG, 'r')
+                text = file.read().split('\n')
+                file.close()
+                current_index = len(text)
                 if current_index > self.root.ids.LoggerScreen.ids.log_view.index:
                     self.root.ids.LoggerScreen.ids.log_view. \
-                        write(file[self.root.ids.LoggerScreen.ids.log_view.index - 1:])
+                        write(text[self.root.ids.LoggerScreen.ids.log_view.index - 1:])
                     self.root.ids.LoggerScreen.ids.log_view.index = current_index
 
     def open_link(self, *args):
@@ -227,11 +233,10 @@ class OrionServer(App):
 
     def clean_log(self):
         if self.root is not None:
-            appLogger.clean()
             self.root.ids.LoggerScreen.ids.log_view.clean()
 
     def export_log(self):
-        pass
+        appLogger.export()
 
     def transfer_magic(self):
         if self.root is not None:

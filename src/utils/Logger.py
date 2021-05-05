@@ -40,23 +40,31 @@ class Logger:
         Reads the whole logger.
         :return: The full logger string.
         """
-        return open(self.path, 'r').read()
+        file = open(self.path, 'r')
+        txt = file.read()
+        file.close()
+        return txt
 
-    def export(self, path: str, name='log'):
+    def export(self, ):
         """
         This function bring the ability to export the whole log file to other external file.
-        :param path: The full abs path to export to.
-        :param name: The name of the file. Default as "log"
         """
-        name += self.FORMAT
+        name = 'OrionLog-' + datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
+        expPath = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Downloads')
+
+        path = os.path.join(expPath, "OrionLogs")
+
         try:
+            print(os.path.join(path, name))
             os.makedirs(path)
 
-        except FileExistsError:
-            pass
+        except FileExistsError as e:
+            print(e)
 
-        open(os.path.join(path, name), 'w').write("Log Export: {}\n".format(
-            datetime.now().strftime("%d/%m/%Y %H:%M:%S") + self.read()))
+        name += self.FORMAT
+        file = open(os.path.join(path, name), 'w')
+        file.write("Log Export: {}\n\n{}".format(
+            datetime.now().strftime("%d/%m/%Y %H:%M:%S"), self.read()))
 
     def clean(self):
         """
