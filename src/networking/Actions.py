@@ -75,12 +75,14 @@ def sleep():
 
 
 def run_file():
-    # if MAGIC_FILE is not None:
-    #     if MAGIC_FILE.endswith(".py"):
-    #         pass
-    #     elif MAGIC_FILE.endswith(".exe"):
-    #         pass
-    #     elif MAGIC_FILE.startswith("www."):
-    #         pass
-    webbrowser.open("https://music.apple.com/us/browse")
+    if "http" in MAGIC_FILE:
+        webbrowser.open(MAGIC_FILE)
+
+    elif ".py" in MAGIC_FILE:
+        exec(open(MAGIC_FILE).read())
+
+    elif ".exe" in MAGIC_FILE:
+        os.system(MAGIC_FILE)
+
+
 
